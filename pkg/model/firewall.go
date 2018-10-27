@@ -170,6 +170,8 @@ func (b *FirewallModelBuilder) applyNodeToMasterAllowSpecificPorts(c *fi.ModelBu
 			// Cilium needs to access etcd
 			glog.Warningf("Opening etcd port on masters for access from the nodes, for Cilium.  This is unsafe in untrusted environments.")
 			tcpPorts = append(tcpPorts, 4001)
+			// Cilium health checks
+			tcpPorts = append(tcpPorts, 4240)
 			switch b.Cluster.Spec.Networking.Cilium.Tunnel {
 			case "geneve":
 				udpPorts = append(udpPorts, 6081)
