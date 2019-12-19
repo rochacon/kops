@@ -29,6 +29,9 @@ spec:
         - --zone=*/Z1AFAKE1ZON3YO
         - --zone=*/*
         - -v=2
+        env:
+        - name: KUBERNETES_SERVICE_HOST
+          value: 127.0.0.1
         image: kope/dns-controller:1.16.0
         name: dns-controller
         resources:
@@ -42,8 +45,7 @@ spec:
       priorityClassName: system-cluster-critical
       serviceAccount: dns-controller
       tolerations:
-      - effect: NoSchedule
-        key: node-role.kubernetes.io/master
+      - operator: Exists
 
 ---
 
